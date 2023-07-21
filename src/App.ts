@@ -35,6 +35,9 @@ export class App {
 
         this.init();
     }
+    destroy() {
+        this._app.destroy();
+    }
 
     init() {
         this._app = new Application({
