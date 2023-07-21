@@ -12,3 +12,13 @@ export interface IStageItem {
     items: Sprite[];
     container: Container;
 }
+
+export interface IAppConfig {
+    totalItems: number;
+    rotationSpeed: number;
+}
+export interface IContainersConfig {
+    itemWidth: number;
+    itemHeight: number;
+    totalItems: number;
+}

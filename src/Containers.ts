@@ -1,7 +1,7 @@
 import { Application, Container, Sprite, Texture } from "pixi.js";
 import { EventBus } from "./EventBus";
 import { decreaseAngle, increaseAngle, toRadians } from "./helpers";
-import { IStageItem } from "./types";
+import { IContainersConfig, IStageItem } from "./types";
 
 export class Containers implements IStageItem {
     public container: Container;
@@ -23,15 +23,17 @@ export class Containers implements IStageItem {
     private _itemWidth: number;
     private _itemHeight: number;
 
-    constructor(app: Application, eventBus: EventBus, texture: Texture) {
+    constructor(app: Application, eventBus: EventBus, texture: Texture, config?: Partial<IContainersConfig>) {
         this._app = app;
         this._eventBus = eventBus;
 
         this._texture = texture;
         this.items = [];
+        this.positions = [];
 
-        this._itemWidth = 100;
-        this._itemHeight = 200;
+        this._totalItems = config?.totalItems || 12;
+        this._itemWidth = config?.itemWidth || 100;
+        this._itemHeight = config?.itemHeight || 200;
 
         this._init();
     }
@@ -77,9 +79,6 @@ export class Containers implements IStageItem {
     }
 
     private _init() {
-        this.positions = [];
-        this._totalItems = 12;
-
         const rendererWidth = this._app.renderer.width;
         const rendererHeight = this._app.renderer.height;
         const GAP = 100;
